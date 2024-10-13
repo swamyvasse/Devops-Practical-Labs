@@ -1,6 +1,6 @@
 - name: catalogue-component
   hosts: catalogue
-  become: yes
+  become: 'yes'
   tasks:
     - name: Setup NodeJS repos
       ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
@@ -14,7 +14,7 @@
       ignore_errors: true
     - when: out.rc != 0
       name: create roboshop user
-      become: yes
+      become: 'yes'
       ansible.builtin.user:
         name: roboshop
     - name: check /app directory exists or not
@@ -23,7 +23,7 @@
         register: directory
     - name: print directory status
       ansible.builtin.debug:
-        msg: "output: {{directory}}"
+        msg: 'output: {{directory}}'
     - when: directory stat.exists == False
       name: create /app directory
       ansible.builtin.file:
@@ -37,7 +37,7 @@
       ansible.builtin.unarchive:
         src: /tmp/catalogue.zip
         dest: /app
-        remote_src: yes
+        remote_src: 'yes'
     - name: download the dependencies
       ansible.builtin.command: npm install
       args:
@@ -53,7 +53,7 @@
       ansible.builtin.service:
         name: catalogue
         state: started
-        enabled: yes
+        enabled: 'yes'
     - name: copy file /mongo.repo to /etc/yum.repos.d/mongo.repo
       ansible.builtin.copy:
         src: /mongo.repo

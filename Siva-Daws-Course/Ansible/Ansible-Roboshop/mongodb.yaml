@@ -1,0 +1,13 @@
+- name: mongodb-component
+  hosts: mongodb
+  become: yes
+  tasks:
+  - name: copy file /mongo.repo to /etc/yum.repos.d/mongo.repo
+    ansible.builtin.copy:
+      src: /mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  - name: install mongodb-org 
+    ansible.builtin.yum:
+      name: mongodb-org
+      state: installed
+      

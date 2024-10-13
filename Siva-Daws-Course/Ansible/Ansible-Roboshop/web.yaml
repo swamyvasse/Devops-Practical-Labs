@@ -17,7 +17,7 @@
         state: absent
     - name: Download the frontend content
       ansible.builtin.get_url:
-        url: 'https://roboshop-builds.s3.amazonaws.com/web.zip'
+        url: https://roboshop-builds.s3.amazonaws.com/web.zip
         dest: /tmp
     - name: extract web artifact
       ansible.builtin.unarchive:
